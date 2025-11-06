@@ -1,31 +1,38 @@
-require('dotenv').config();
+require("dotenv").config();
 
-const {Client, IntentsBitField} = require('discord.js');
+const { Client, Events, GatewayIntentBits } = require("discord.js");
 
 const client = new Client({
-    intents: [
-        IntentsBitField.Flags.Guilds,
-        IntentsBitField.Flags.GuildMembers,
-        IntentsBitField.Flags.GuildMessages,
-        IntentsBitField.Flags.MessageContent,
-    ],
-}) 
-
-//mensaje para avisar que el bot esta listo una vez iniciado con nodemon
-client.on('ready', (c) => {
-    console.log(`${c.user.tag} despertó 🥳🥳`);
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
-//trigger para que el bot vea los mensajes
-client.on('messageCreate', (message) => {
-    //hacer que el bot no se responda a sí mismo
-    if(message.author.bot){
-        return;
-    }
-    if(message.content === 'hola'){
-        message.reply('callate');
-    }
+// Mensaje para avisar que el bot está listo
+client.on(Events.ClientReady, (c) => {
+  console.log(`${c.user.tag} despertó 🥳🥳`);
 });
 
+client.on(Events.InteractionCreate, (interaction) => {
+  if (!interaction.isChatInputCommand()) return;
+
+  if (interaction.commandName === "hola") {
+    interaction.reply("hola!");
+  }
+
+  if (interaction.commandName === "ping") {
+    interaction.reply("pong!");
+  }
+
+  if (interaction.commandName === "suma") {
+    const num1 = interaction.options.get("first-number").value;
+    const num2 = interaction.options.get("second-number").value;
+
+    interaction.reply(`${num1} + ${num2} = ${num1 + num2}`);
+  }
+});
 
 client.login(process.env.TOKEN);

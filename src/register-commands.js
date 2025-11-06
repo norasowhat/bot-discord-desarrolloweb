@@ -1,27 +1,53 @@
 require("dotenv").config();
-const { REST, routes, Routes } = require("discord.js");
+const { REST, Routes, ApplicationCommandOptionType } = require("discord.js");
 
-//comandos
+// Comandos
 const commands = [
   {
     name: "hola",
     description: "responde con hola!",
   },
+  {
+    name: "ping",
+    description: "pong!",
+  },
+  {
+    name: "suma",
+    description: "adds two numbers",
+    options: [
+      {
+        name: "first-number",
+        description: "the first number",
+        type: ApplicationCommandOptionType.Number,
+        required: true,
+      },
+      {
+        name: "second-number",
+        description: "the second number",
+        type: ApplicationCommandOptionType.Number,
+        required: true,
+      },
+    ],
+  },
 ];
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
-//registrar los comandos
+
+// Registrar los comandos
 (async () => {
   try {
-    console.log("registrando slash commands...");
+    console.log("Registrando slash commands...");
 
     await rest.put(
-      Routes.applicationCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
+      Routes.applicationGuildCommands(
+        process.env.CLIENT_ID,
+        process.env.GUILD_ID
+      ),
       { body: commands }
     );
 
-    console.log("slash commands registrados");
+    console.log("Slash commands registrados correctamente");
   } catch (error) {
-    console.log(`error: ${error}`);
+    console.error(`Error al registrar comandos: ${error}`);
   }
 })();
