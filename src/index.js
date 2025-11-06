@@ -11,8 +11,6 @@ const client = new Client({
     ],
 }) 
 
-
-console.log('Token cargado:', process.env.TOKEN);
 //mensaje para avisar que el bot esta listo una vez iniciado con nodemon
 client.on('ready', (c) => {
     console.log(`${c.user.tag} despertó 🥳🥳`);
