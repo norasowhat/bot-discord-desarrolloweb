@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/norasowhat/bot-discord-desarrolloweb/issues"
   },
-  "homepage": "https://github.com/norasowhat/bot-discord-desarrolloweb#readme"
+  "homepage": "https://github.com/norasowhat/bot-discord-desarrolloweb#readme",
+  "dependencies": {
+    "discord.js": "^14.24.2"
+  }
 }
