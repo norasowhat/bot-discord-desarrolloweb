@@ -17,17 +17,21 @@ const commands = [
     options: [
       {
         name: "first-number",
-        description: "the first number",
+        description: "primer número",
         type: ApplicationCommandOptionType.Number,
         required: true,
       },
       {
         name: "second-number",
-        description: "the second number",
+        description: "segundo número",
         type: ApplicationCommandOptionType.Number,
         required: true,
       },
     ],
+  },
+  {
+    name: "embed",
+    description: "send an embed!",
   },
 ];
 
