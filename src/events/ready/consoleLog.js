@@ -1,7 +1,3 @@
-module.exports = (client) => {
-  console.log(`${client.user.tag} is online.`);
-};
-
 const { ActivityType } = require("discord.js");
 
 let status = [

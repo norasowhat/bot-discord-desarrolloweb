@@ -4,11 +4,10 @@ const {
 } = require("discord.js");
 
 module.exports = {
-  deleted: true,
+  deleted: false,
   name: "ban",
-  description: "Bans a member!!!",
-  // devOnly: Boolean,
-  // testOnly: Boolean,
+  description: "banea a alguien!",
+
   options: [
     {
       name: "target-user",
@@ -26,6 +25,6 @@ module.exports = {
   botPermissions: [PermissionFlagsBits.Administrator],
 
   callback: (client, interaction) => {
-    interaction.reply("ban..");
+    interaction.reply("baneado 🥳🥳");
   },
 };
