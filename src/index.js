@@ -1,5 +1,6 @@
 require("dotenv").config();
 const { Client, GatewayIntentBits } = require("discord.js");
+const mongoose = require("mongoose");
 const eventHandler = require("./handlers/eventHandler");
 
 const client = new Client({
@@ -7,9 +8,21 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildPresences,
     GatewayIntentBits.MessageContent,
   ],
 });
 
-eventHandler(client);
-client.login(process.env.TOKEN);
+(async () => {
+  try {
+    mongoose.set("strictQuery", false);
+    await mongoose.connect(process.env.MONGODB_URI);
+    console.log("Connected to DB.");
+
+    eventHandler(client);
+
+    client.login(process.env.TOKEN);
+  } catch (error) {
+    console.log(`Error: ${error}`);
+  }
+})();
