@@ -20,6 +20,8 @@
   "homepage": "https://github.com/norasowhat/bot-discord-desarrolloweb#readme",
   "dependencies": {
     "discord.js": "^14.24.2",
-    "dotenv": "^17.2.3"
+    "dotenv": "^17.2.3",
+    "ms": "^2.1.3",
+    "pretty-ms": "^9.3.0"
   }
 }
