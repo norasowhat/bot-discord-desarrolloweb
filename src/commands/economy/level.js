@@ -10,13 +10,13 @@ const Level = require("../../models/Level");
 try {
   Font.loadDefault();
 } catch (error) {
-  console.log("Error loading default fonts, continuing anyway...");
+  console.log("Error cargando los fonts .");
 }
 
 module.exports = {
   callback: async (client, interaction) => {
     if (!interaction.inGuild()) {
-      interaction.reply("You can only run this command inside a server.");
+      interaction.reply("Este comando solo aplica para servidores.");
       return;
     }
 
@@ -34,8 +34,8 @@ module.exports = {
     if (!fetchedLevel) {
       interaction.editReply(
         mentionedUserId
-          ? `${targetUserObj.user.tag} doesn't have any levels yet. Try again when they chat a little more.`
-          : "You don't have any levels yet. Chat a little more and try again."
+          ? `${targetUserObj.user.tag} no tiene ningún nivel. Intenta después .`
+          : "No tienes ningún nivel aún. Intenta después."
       );
       return;
     }
@@ -79,17 +79,17 @@ module.exports = {
     } catch (error) {
       console.error("Error generating level card:", error);
       await interaction.editReply(
-        "There was an error generating the level card. Please try again later."
+        "Hubo un error generando la carta. Intenta después ."
       );
     }
   },
 
   name: "level",
-  description: "Shows your/someone's level.",
+  description: "Muestra el nivel",
   options: [
     {
       name: "target-user",
-      description: "The user whose level you want to see.",
+      description: "Elige el usuario !",
       type: ApplicationCommandOptionType.Mentionable,
     },
   ],

@@ -5,13 +5,13 @@ module.exports = {
   description: "Suma dos números",
   options: [
     {
-      name: "first-number",
+      name: "primer-numero",
       description: "primer número",
       type: ApplicationCommandOptionType.Number,
       required: true,
     },
     {
-      name: "second-number",
+      name: "segundo-numero",
       description: "segundo número",
       type: ApplicationCommandOptionType.Number,
       required: true,
@@ -19,8 +19,8 @@ module.exports = {
   ],
 
   callback: (client, interaction) => {
-    const num1 = interaction.options.get("first-number").value;
-    const num2 = interaction.options.get("second-number").value;
+    const num1 = interaction.options.get("primer-numero").value;
+    const num2 = interaction.options.get("segundo-numero").value;
     interaction.reply(`${num1} + ${num2} = ${num1 + num2}`);
   },
 };
