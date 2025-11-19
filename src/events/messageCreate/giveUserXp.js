@@ -40,12 +40,12 @@ module.exports = async (client, message) => {
         level.level += 1;
 
         message.channel.send(
-          `${message.member} you have leveled up to **level ${level.level}**.`
+          `${message.member} haz ascendido a **nivel ${level.level}**.`
         );
       }
 
       await level.save().catch((e) => {
-        console.log(`Error saving updated level ${e}`);
+        console.log(`Error guardando el nivel ${e}`);
         return;
       });
       cooldowns.add(message.author.id);
@@ -70,6 +70,6 @@ module.exports = async (client, message) => {
       }, 60000);
     }
   } catch (error) {
-    console.log(`Error giving xp: ${error}`);
+    console.log(`Error: ${error}`);
   }
 };

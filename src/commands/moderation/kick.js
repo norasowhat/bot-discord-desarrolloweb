@@ -14,22 +14,19 @@ module.exports = {
 
   callback: async (client, interaction) => {
     const targetUserId = interaction.options.get("target-user").value;
-    const reason =
-      interaction.options.get("reason")?.value || "No reason provided";
+    const reason = interaction.options.get("reason")?.value || "Sin motivo...";
 
     await interaction.deferReply();
 
     const targetUser = await interaction.guild.members.fetch(targetUserId);
 
     if (!targetUser) {
-      await interaction.editReply("That user doesn't exist in this server.");
+      await interaction.editReply("El usuario no  existe en el servidor.");
       return;
     }
 
     if (targetUser.id === interaction.guild.ownerId) {
-      await interaction.editReply(
-        "You can't kick that user because they're the server owner."
-      );
+      await interaction.editReply("No se puede expulsar al admin.");
       return;
     }
 
@@ -39,14 +36,14 @@ module.exports = {
 
     if (targetUserRolePosition >= requestUserRolePosition) {
       await interaction.editReply(
-        "You can't kick that user because they have the same/higher role than you."
+        "No puedes expulsar a este usuario proque tiene mismo/mayor rol que tú."
       );
       return;
     }
 
     if (targetUserRolePosition >= botRolePosition) {
       await interaction.editReply(
-        "I can't kick that user because they have the same/higher role than me."
+        "No puedes expulsar a este usuario proque tiene mismo/mayor rol que yo."
       );
       return;
     }
@@ -54,25 +51,25 @@ module.exports = {
     try {
       await targetUser.kick(reason);
       await interaction.editReply(
-        `User ${targetUser} was kicked\nReason: ${reason}`
+        `Usuario ${targetUser} fue expulsado\nMotivo: ${reason}`
       );
     } catch (error) {
-      console.log(`There was an error when kicking: ${error}`);
+      console.log(`Hubo un error: ${error}`);
     }
   },
 
   name: "kick",
-  description: "Kicks a member from this server.",
+  description: "Expulsa a un usuario..",
   options: [
     {
       name: "target-user",
-      description: "The user you want to kick.",
+      description: "Usuario a expulsar.",
       type: ApplicationCommandOptionType.Mentionable,
       required: true,
     },
     {
       name: "reason",
-      description: "The reason you want to kick.",
+      description: "Motivo.",
       type: ApplicationCommandOptionType.String,
     },
   ],

@@ -17,7 +17,7 @@ const client = new Client({
   try {
     mongoose.set("strictQuery", false);
     await mongoose.connect(process.env.MONGODB_URI);
-    console.log("Connected to DB.");
+    console.log("Conectado a la base de datos.");
 
     eventHandler(client);
 
